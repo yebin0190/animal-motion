@@ -249,14 +249,10 @@ body {
    EXPANDED STATE
 ============================== */
 
-/* 몸통 확대 */
-
 .character.is-expanded .body {
   transform: scale(1.4);
   border-radius: 46%;
 }
-
-/* 귀 길이 1.5배 */
 
 .character.is-expanded .ear {
   transform: scaleY(1.5);
@@ -270,8 +266,6 @@ body {
 .character.is-expanded .ear-right {
   transform: scale(1.5) translate(5px, -2px);
 }
-
-/* 꼬리 위로 세우기 */
 
 .character.is-expanded .tail {
   right: -17%;
