@@ -1,0 +1,449 @@
+/* ==============================
+   RESET
+============================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #30221d;
+  --body: #b95836;
+  --cream: #e8c9a5;
+  --light: #f3e6d6;
+  --tail-black: #211a17;
+  --line: #5c4639;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  background: var(--bg);
+  color: var(--light);
+
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* ==============================
+   POSTER
+============================== */
+
+.poster {
+  position: relative;
+
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+
+  min-height: 600px;
+
+  padding: 45px 6vw 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+}
+
+/* ==============================
+   HEADER
+============================== */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  position: relative;
+  z-index: 5;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--cream);
+  margin-bottom: 18px;
+}
+
+.header h1 {
+  font-size: clamp(42px, 6vw, 76px);
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 0.95;
+}
+
+.subtitle {
+  margin-top: 15px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--cream);
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--cream);
+}
+
+/* ==============================
+   VISUAL AREA
+============================== */
+
+.visual {
+  position: absolute;
+
+  width: 100%;
+  height: 55%;
+
+  left: 0;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: visible;
+}
+
+/* ==============================
+   CHARACTER MOVEMENT
+============================== */
+
+.character-motion {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* ==============================
+   CHARACTER
+============================== */
+
+.character {
+  position: relative;
+
+  width: clamp(120px, 17vw, 190px);
+  aspect-ratio: 1 / 1;
+
+  border: none;
+  padding: 0;
+  background: transparent;
+
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* ==============================
+   BODY
+============================== */
+
+.body {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+
+  border-radius: 50%;
+  background: var(--body);
+
+  transform: scale(1);
+  transform-origin: center;
+
+  transition:
+    transform 0.14s cubic-bezier(0.2, 1, 0.3, 1),
+    border-radius 0.14s ease-out;
+
+  z-index: 1;
+}
+
+/* ==============================
+   EARS
+============================== */
+
+.ear {
+  position: absolute;
+
+  width: 27%;
+  height: 27%;
+
+  top: -9%;
+
+  border-radius: 50%;
+  background: var(--cream);
+
+  transform: scaleY(1);
+  transform-origin: bottom center;
+
+  transition:
+    transform 0.14s ease-out,
+    top 0.14s ease-out;
+
+  z-index: 0;
+}
+
+.ear-left {
+  left: 8%;
+}
+
+.ear-right {
+  right: 8%;
+}
+
+/* ==============================
+   TAIL
+============================== */
+
+.tail {
+  position: absolute;
+
+  width: 43%;
+  height: 72%;
+
+  right: -30%;
+  bottom: -13%;
+
+  border-radius: 50%;
+
+  background: repeating-linear-gradient(
+    0deg,
+    var(--cream) 0px,
+    var(--cream) 13px,
+    var(--tail-black) 13px,
+    var(--tail-black) 26px
+  );
+
+  transform: rotate(-35deg);
+  transform-origin: 15% 85%;
+
+  transition:
+    transform 0.14s ease-out,
+    right 0.14s ease-out,
+    bottom 0.14s ease-out;
+
+  z-index: 0;
+}
+
+/* ==============================
+   EXPANDED STATE
+============================== */
+
+/* 몸통 확대 */
+
+.character.is-expanded .body {
+  transform: scale(1.4);
+  border-radius: 46%;
+}
+
+/* 귀 길이 1.5배 */
+
+.character.is-expanded .ear {
+  transform: scaleY(1.5);
+  top: -12%;
+}
+
+.character.is-expanded .ear-left {
+  transform: scale(1.5) translate(-5px, -2px);
+}
+
+.character.is-expanded .ear-right {
+  transform: scale(1.5) translate(5px, -2px);
+}
+
+/* 꼬리 위로 세우기 */
+
+.character.is-expanded .tail {
+  right: -17%;
+  bottom: -5%;
+
+  transform: rotate(-105deg) scale(1.05);
+}
+
+/* ==============================
+   GUIDE
+============================== */
+
+.guide {
+  position: absolute;
+
+  left: 50%;
+  bottom: 15px;
+
+  transform: translateX(-50%);
+
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--cream);
+}
+
+.side-label {
+  position: absolute;
+
+  right: 6vw;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  writing-mode: vertical-rl;
+
+  font-size: 9px;
+  line-height: 1.8;
+  letter-spacing: 2px;
+
+  color: var(--cream);
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 40px;
+
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-label {
+  margin-bottom: 12px;
+
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--cream);
+}
+
+.description {
+  max-width: 310px;
+
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--light);
+}
+
+.event-info {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 15px 35px;
+}
+
+.event-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-info span {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--cream);
+}
+
+.event-info p {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.page-number {
+  position: absolute;
+
+  right: 6vw;
+  top: 50%;
+
+  writing-mode: vertical-rl;
+
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--cream);
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 650px) {
+  .poster {
+    min-height: 650px;
+    padding: 30px 25px;
+  }
+
+  .header h1 {
+    font-size: 42px;
+  }
+
+  .header-info {
+    font-size: 7px;
+  }
+
+  .visual {
+    height: 45%;
+  }
+
+  .character {
+    width: 125px;
+  }
+
+  .side-label,
+  .page-number {
+    display: none;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+  }
+
+  .description {
+    max-width: 280px;
+  }
+
+  .event-info {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+/* ==============================
+   REDUCED MOTION
+============================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .character-motion {
+    transform: none !important;
+  }
+
+  .body,
+  .ear,
+  .tail {
+    transition: none;
+  }
+}
